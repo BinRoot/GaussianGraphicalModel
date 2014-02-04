@@ -28,11 +28,17 @@ problem_parameters;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % -------------------------- INPUT DATA --------------------------------------%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+%p = 295;
 data_parameters; % Define parameters for generating simulated data
 
+%load('./data/X.txt');
+%S1 = cov(X');
+%S1 = S1(1:100,1:100);
+%load('./data/Y.txt');
+%S2 = cov(Y');
+%S2 = S2(1:100,1:100);
+
 % Generate simulated data
-fprintf('p = %?', p);
 [Theta_true_1, Theta_true_2, ind_m_common, ind_m_pert] = data(p);
 
 [S1, S2] = generate_samples(Theta_true_1, Theta_true_2, n1, n2); % Replace this 

@@ -30,8 +30,14 @@ problem_parameters;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 data_parameters; % Define parameters for generating simulated data
-
+%p = 295;
 % Generate simulated data
+%load('./data/X.txt');
+%S1 = cov(X');
+%S1 = S1(1:100,1:100);
+%load('./data/Y.txt');
+%S2 = cov(Y');
+
 [Theta_true_1, Theta_true_2, ind_m_pert] = data(p, ...
 umin_sparse,umax_sparse, umin_pert, umax_pert, sparsity_prob, m_pert);
 
