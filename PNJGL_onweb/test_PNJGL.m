@@ -30,18 +30,18 @@ problem_parameters;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 data_parameters; % Define parameters for generating simulated data
-%p = 295;
+p = 295;
 % Generate simulated data
-%load('./data/X.txt');
-%S1 = cov(X');
+load('./data/X.txt');
+S1 = cov(X');
 %S1 = S1(1:100,1:100);
-%load('./data/Y.txt');
-%S2 = cov(Y');
+load('./data/Y.txt');
+S2 = cov(Y');
 
 [Theta_true_1, Theta_true_2, ind_m_pert] = data(p, ...
 umin_sparse,umax_sparse, umin_pert, umax_pert, sparsity_prob, m_pert);
 
-[S1, S2] = generate_samples(Theta_true_1, Theta_true_2, n1, n2); % Replace this 
+% [S1, S2] = generate_samples(Theta_true_1, Theta_true_2, n1, n2); % Replace this 
 % line by user-defined sample covariance matrices S1, S2 if desired.
 
 
@@ -78,6 +78,17 @@ imagesc(Theta_1 - diag(diag(Theta_1)));
 title('Estimated network 1');
 colorbar
 
+res1 = Theta_1 - diag(diag(Theta_1));
+res1 = reshape (res1,87025,1);
+[res1,res1_indices] = sort(res1);
+res1 = res1(end-10: end);
+res1_indices = res1_indices(end-10: end);
+res1_indices = [ idivide(res1_indices-1,295)+1  res1_indices-idivide(res1_indices-1,295)*295 ];
+
+disp("data X values:");
+disp(res1);
+disp(res1_indices);
+
 
 subplot(2,2,3);
 imagesc(Theta_true_2 - diag(diag(Theta_true_2)));
@@ -89,25 +100,14 @@ imagesc(Theta_2 - diag(diag(Theta_2)));
 title('Estimated network 2');
 colorbar
 
+res2 = Theta_2 - diag(diag(Theta_2));
+res2 = reshape (res2,87025,1);
+[res2,res2_indices] = sort(res2);
+res2 = res2(end-10: end);
+res2_indices = res2_indices(end-10: end);
+res2_indices = [ idivide(res2_indices-1,295)+1  res2_indices-idivide(res2_indices-1,295)*295 ];
 
-% ------ 2. Compare estimated perturbations to true perturbations
-
-figure;
-subplot(2,1,1);
-imagesc(Theta_true_2 - Theta_true_1);
-colorbar
-title('True difference of networks');
-
-subplot(2,1,2);
-imagesc(Theta_2 - Theta_1);
-title('Estimated difference of networks');
-colorbar
-
-
-
-
-
-
-
-
+disp("data Y values:");
+disp(res2);
+disp(res2_indices);
 
