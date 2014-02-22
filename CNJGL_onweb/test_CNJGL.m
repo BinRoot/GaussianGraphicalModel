@@ -28,22 +28,23 @@ problem_parameters;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % -------------------------- INPUT DATA --------------------------------------%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-p = 295;
+
+% p = 295;
+p = 500;
 data_parameters; % Define parameters for generating simulated data
 
-load('./data/X.txt');
-S1 = cov(X');
+% load('./data/X.txt');
+% S1 = cov(X);
 
 load('./data/Y.txt');
-S2 = cov(Y');
-S2 = S2(:,2:2);
+% Y = Y(:,2:2);
+% S2 = cov(Y);
+
 
 % Generate simulated data
 [Theta_true_1, Theta_true_2, ind_m_common, ind_m_pert] = data(p);
-
 [S1, S2] = generate_samples(Theta_true_1, Theta_true_2, n1, n2); % Replace this 
 % line by user-defined sample covariance matrices S1, S2 if desired.
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % -------------------------- RUN ADMM ALGORITHM -------------------------------%
@@ -61,53 +62,52 @@ fprintf('Run time of algorithm = %f seconds \n', t2);
 
 % ------ 0. Relative error between estimate and true inverse covariance matrices
 
-rel_err = max ( norm(Theta_true_1 - Theta_1, 'fro')/norm(Theta_true_1,'fro'), norm(Theta_true_2 - Theta_2,'fro')/norm(Theta_2, 'fro'));
+% rel_err = max ( norm(Theta_true_1 - Theta_1, 'fro')/norm(Theta_true_1,'fro'), norm(Theta_true_2 - Theta_2,'fro')/norm(Theta_2, 'fro'));
 
-fprintf('Relative error of the estimated solution = %f \n', rel_err);
+% fprintf('Relative error of the estimated solution = %f \n', rel_err);
 
 % ------ 1. Compare estimated cohub network to true network
 
-figure;
-subplot(2,2,1);
-imagesc(Theta_true_1 - diag(diag(Theta_true_1)));
-colorbar
-title('True network 1');
+%figure;
+%subplot(2,2,1);
+%imagesc(Theta_true_1 - diag(diag(Theta_true_1)));
+%colorbar
+%title('True network 1');
 
-subplot(2,2,2);
-imagesc(Theta_1 - diag(diag(Theta_1)));
-title('Estimated network 1');
-colorbar
+%subplot(2,1,1);
+%imagesc(Theta_1 - diag(diag(Theta_1)));
+%title('Estimated network 1');
+%colorbar();
 
 res1 = Theta_1 - diag(diag(Theta_1));
-res1 = reshape (res1,87025,1);
+res1 = reshape (res1,p*p,1);
 [res1,res1_indices] = sort(res1);
 res1 = res1(end-10: end);
 res1_indices = res1_indices(end-10: end);
-res1_indices = [ idivide(res1_indices-1,295)+1  res1_indices-idivide(res1_indices-1,295)*295 ];
-
-disp("data X values:");
-disp(res1);
-disp(res1_indices);
+res1_indices = [ idivide(res1_indices-1,p)+1  res1_indices-idivide(res1_indices-1,p)*p ];
 
 
+save res1.mat res1;
+save res1_indices.mat res1_indices;
+disp("data X values saved");
 
-subplot(2,2,3);
-imagesc(Theta_true_2 - diag(diag(Theta_true_2)));
-colorbar
-title('True network 2');
+%subplot(2,2,3);
+%imagesc(Theta_true_2 - diag(diag(Theta_true_2)));
+%colorbar
+%title('True network 2');
 
-subplot(2,2,4);
-imagesc(Theta_2 - diag(diag(Theta_2)));
-title('Estimated network 2');
-colorbar();
+%subplot(2,1,2);
+%imagesc(Theta_2 - diag(diag(Theta_2)));
+%title('Estimated network 2');
+%colorbar();
 
 res2 = Theta_2 - diag(diag(Theta_2));
-res2 = reshape (res2,87025,1);
+res2 = reshape (res2,p*p,1);
 [res2,res2_indices] = sort(res2);
 res2 = res2(end-10: end);
 res2_indices = res2_indices(end-10: end);
-res2_indices = [ idivide(res2_indices-1,295)+1  res2_indices-idivide(res2_indices-1,295)*295 ];
+res2_indices = [ idivide(res2_indices-1,p)+1  res2_indices-idivide(res2_indices-1,p)*p ];
 
-disp("data Y values:");
-disp(res2);
-disp(res2_indices);
+disp("data Y values saved");
+save res2.mat res2;
+save res2_indices.mat res2_indices;
