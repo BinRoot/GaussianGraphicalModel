@@ -30,20 +30,24 @@ problem_parameters;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % p = 295;
-p = 500;
+% p = 50;
 data_parameters; % Define parameters for generating simulated data
 
-% load('./data/X.txt');
-% S1 = cov(X);
+load('./data/X.txt');
+S1 = cov(X);
 
-load('./data/Y.txt');
-% Y = Y(:,2:2);
-% S2 = cov(Y);
+p=size(S1)(1)
 
+%load('./data/Y.txt');
+%Y = Y(:,2:2);
+%disp(size(Y));
+%S2 = cov(Y);
+%disp(size(S2));
+%S2 = S2(1:10,1:10);
 
 % Generate simulated data
-[Theta_true_1, Theta_true_2, ind_m_common, ind_m_pert] = data(p);
-[S1, S2] = generate_samples(Theta_true_1, Theta_true_2, n1, n2); % Replace this 
+%[Theta_true_1, Theta_true_2, ind_m_common, ind_m_pert] = data(p);
+%[S1, S2] = generate_samples(Theta_true_1, Theta_true_2, n1, n2); % Replace this 
 % line by user-defined sample covariance matrices S1, S2 if desired.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -51,7 +55,7 @@ load('./data/Y.txt');
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 tic();
-[Theta_1,Theta_2,V_1,V_2,iter_adm,relError] = ADM_CNJGL(S1,S2,lambda_1,lambda_2, n1, n2);
+[Theta_1,Theta_2,V_1,V_2,iter_adm,relError] = ADM_CNJGL(S1,S1,lambda_1,lambda_2, n1, n2);
 t2 = toc();
 
 fprintf('Run time of algorithm = %f seconds \n', t2);
