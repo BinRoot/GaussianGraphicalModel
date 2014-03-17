@@ -30,13 +30,13 @@ problem_parameters;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % p = 295;
-% p = 50;
+p = 50;
 data_parameters; % Define parameters for generating simulated data
 
 load('./data/X.txt');
 S1 = cov(X);
 
-p=size(S1)(1)
+% p=size(S1)(1)
 
 %load('./data/Y.txt');
 %Y = Y(:,2:2);
@@ -46,8 +46,8 @@ p=size(S1)(1)
 %S2 = S2(1:10,1:10);
 
 % Generate simulated data
-%[Theta_true_1, Theta_true_2, ind_m_common, ind_m_pert] = data(p);
-%[S1, S2] = generate_samples(Theta_true_1, Theta_true_2, n1, n2); % Replace this 
+[Theta_true_1, Theta_true_2, ind_m_common, ind_m_pert] = data(p);
+[S1, S2] = generate_samples(Theta_true_1, Theta_true_2, n1, n2); % Replace this 
 % line by user-defined sample covariance matrices S1, S2 if desired.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

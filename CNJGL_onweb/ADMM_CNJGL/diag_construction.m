@@ -10,8 +10,12 @@
 
 function [X] = diag_construction(Xtilde,d)
 
+disp("diag_construction");
+disp(size(Xtilde)); % 49 x 50
+disp(size(d)); % 50 x 1
 
 p = size(d,1);
+disp(p); % 50
 
 X = zeros(p,p);
 
