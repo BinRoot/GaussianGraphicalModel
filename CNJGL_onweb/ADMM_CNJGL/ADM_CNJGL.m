@@ -61,6 +61,12 @@ for (r = 1:opts.homotopy_size)
      N_2 = nodiag_construction(C_2);
      N = [N_1; N_2];
      H = soft_scal(N,lambda_2/(2*rho)); d = [d_1;d_2];
+
+     disp("d_1")
+     disp(size(d_1))
+     disp("H")
+     disp(size(H(1:p-1,:)))
+
      V_1 = diag_construction(H(1:p-1,:),d_1);
      V_2 = diag_construction(H(p:2*p-2,:),d_2);
 

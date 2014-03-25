@@ -33,10 +33,20 @@ problem_parameters;
 p = 50;
 data_parameters; % Define parameters for generating simulated data
 
-load('./data/X.txt');
+% X = importdata('../data/X.txt');
+load('../data/X.txt');
+
+disp(size(X))
+[xrows, xcols] = size(X);
+[sorted, indices] = sort(std(X));
+X = X(1:xrows, indices(end-500:end));
+
 S1 = cov(X);
 
-% p=size(S1)(1)
+disp("cov matrix is of size")
+disp(size(S1))
+
+p=size(S1)(1);
 
 %load('./data/Y.txt');
 %Y = Y(:,2:2);
@@ -45,9 +55,11 @@ S1 = cov(X);
 %disp(size(S2));
 %S2 = S2(1:10,1:10);
 
+S2 = S1;
+
 % Generate simulated data
-[Theta_true_1, Theta_true_2, ind_m_common, ind_m_pert] = data(p);
-[S1, S2] = generate_samples(Theta_true_1, Theta_true_2, n1, n2); % Replace this 
+%[Theta_true_1, Theta_true_2, ind_m_common, ind_m_pert] = data(p);
+%[S1, S2] = generate_samples(Theta_true_1, Theta_true_2, n1, n2); % Replace this 
 % line by user-defined sample covariance matrices S1, S2 if desired.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

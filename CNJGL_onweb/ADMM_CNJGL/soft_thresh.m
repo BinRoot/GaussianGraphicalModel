@@ -11,6 +11,9 @@
 
 function [X] = soft_thresh(Y,lambda)
 
+disp("soft_thresh:")
+disp(size(Y))
+
 X = Y;
 if(nargin == 1)
     disp('Not enough inputs');

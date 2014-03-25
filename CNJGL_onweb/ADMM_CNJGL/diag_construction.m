@@ -10,16 +10,17 @@
 
 function [X] = diag_construction(Xtilde,d)
 
-disp("diag_construction");
-disp(size(Xtilde)); % 49 x 50
-disp(size(d)); % 50 x 1
+%disp("diag_construction");
+%disp(size(Xtilde)); % 49 x 50
+%disp(size(d)); % 50 x 1
 
 p = size(d,1);
-disp(p); % 50
+%disp(p); % 50
 
 X = zeros(p,p);
 
-X(1,1) = d(1); X(2:p,1) = Xtilde(:,1);
+X(1,1) = d(1); 
+X(2:p,1) = Xtilde(:,1);
 
 for(j = 2:p-1)
 X(1:j-1,j) = Xtilde(1:j-1,j);
