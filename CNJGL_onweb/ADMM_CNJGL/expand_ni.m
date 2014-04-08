@@ -11,9 +11,12 @@
 
 
 function [Theta] = expand_ni(B,S,rho,n)
-
 A = B - S*n/(2*rho);
+
 [U,S] = eig(A);
+
 s = diag(S);
 s = 0.5.*(s + sqrt(s.*s + 2./(rho/n)));
-Theta = U*diag(s)*U';
+
+ret = U*diag(s)*U';
+Theta = ret;

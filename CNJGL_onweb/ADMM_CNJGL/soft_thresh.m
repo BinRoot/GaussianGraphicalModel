@@ -11,8 +11,8 @@
 
 function [X] = soft_thresh(Y,lambda)
 
-disp("soft_thresh:")
-disp(size(Y))
+% disp("soft_thresh:")
+% disp(size(Y))
 
 X = Y;
 if(nargin == 1)
@@ -21,5 +21,5 @@ if(nargin == 1)
     return;
     %lambda = 1;
 end;
-        
+
 X = sign(Y).*(max(abs(Y) - lambda,0));

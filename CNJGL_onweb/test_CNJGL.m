@@ -35,11 +35,16 @@ data_parameters; % Define parameters for generating simulated data
 
 % X = importdata('../data/X.txt');
 load('../data/X.txt');
-
+#save -6 X.mat X
 disp(size(X))
 [xrows, xcols] = size(X);
 [sorted, indices] = sort(std(X));
-X = X(1:xrows, indices(end-500:end));
+X = X(1:xrows, indices(end-499:end));
+
+% Input data
+X = [0.05, -0.04, 0.06, 0.02, -0.01;
+     0.02, 0.01, -0.06, 0.01, -0.04;
+     0.05, 0.04, -0.02, 0.01, -0.01]
 
 S1 = cov(X);
 
@@ -48,8 +53,9 @@ disp(size(S1))
 
 p=size(S1)(1);
 
-%load('./data/Y.txt');
-%Y = Y(:,2:2);
+load('./data/Y.txt');
+#save -6 Y.mat Y
+Y = Y(:,2:2);
 %disp(size(Y));
 %S2 = cov(Y);
 %disp(size(S2));
@@ -71,6 +77,8 @@ tic();
 t2 = toc();
 
 fprintf('Run time of algorithm = %f seconds \n', t2);
+
+disp(Theta_1)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % --------------------------- PLOTS AND RESULTS -------------------------------%

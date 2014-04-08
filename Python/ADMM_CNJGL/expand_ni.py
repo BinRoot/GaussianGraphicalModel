@@ -1,15 +1,20 @@
-from math import sqrt
-from numpy.linalg import eig
-from numpy import diag, transpose
+from numpy.linalg import eigh
+from numpy import diag, transpose, sqrt
 
 # B: square matrix
 # S: square matrix
 
 def expand_ni(B, S, rho, n):
     A = B - S*n / (2.0 * rho)
-    (S, U) = eig(A)
-    s = 0.5 * (S + map( lambda x: sqrt(x), S*S + 2/(rho/n) ))
-    return U * diag(s) * transpose(U)
+
+    (S, U) = eigh(A, 'U')
+
+    s = S
+    s = 0.5 * (s + sqrt( s*s + 2.0/(rho/(n+0.0)) ))
+
+    mul1 = U*diag(s)
+    ret = mul1 * transpose(U)
+    return ret
 
 ''' # test:
 from numpy import matrix

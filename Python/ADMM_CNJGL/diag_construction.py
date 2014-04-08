@@ -10,9 +10,6 @@ def diag_construction(xtilde, d):
     p = len(d)
     X = matrix(zeros((p, p)))
 
-    print "d", d
-    print "xtilde", xtilde
-
     X[0,0] = d[0]
     X[1:p,0] =  xtilde[:,0]
 
