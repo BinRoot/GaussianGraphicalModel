@@ -10,14 +10,8 @@ diag_construction <- function(xtilde, d) {
   x[2:p,1] <- xtilde[,1]
 
   for (j in 2:p-1) {
-    print(j)
     x[1:(j-1),j] <- xtilde[1:(j-1),j]
     x[j,j] <- d[j]
-    print("--")    
-    print((j+1):p)
-    print(x[(j+1):p,j])
-    print(xtilde[j:(p-1),j])
-    print("--")
     x[(j+1):p,j] <- xtilde[j:(p-1),j]
   }
 

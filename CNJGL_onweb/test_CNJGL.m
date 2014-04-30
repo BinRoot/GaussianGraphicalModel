@@ -33,35 +33,55 @@ problem_parameters;
 p = 50;
 data_parameters; % Define parameters for generating simulated data
 
+
+load('./data/Y.txt');
+Y = Y(:,2:2);
+
+
 % X = importdata('../data/X.txt');
 load('../data/X.txt');
 #save -6 X.mat X
 disp(size(X))
-[xrows, xcols] = size(X);
+
+
+% all 1 value entries
+X1 = X(find(Y+1), :);
+
+% all -1 value entries
+X2 = X(find(Y-1), :);
+
+
+[x1rows, x1cols] = size(X1);
+[x2rows, x2cols] = size(X2);
+
 [sorted, indices] = sort(std(X));
-X = X(1:xrows, indices(end-499:end));
+X1 = X1(1:x1rows, indices(end-9:end));
+X2 = X2(1:x2rows, indices(end-9:end));
 
 % Input data
-X = [0.05, -0.04, 0.06, 0.02, -0.01;
-     0.02, 0.01, -0.06, 0.01, -0.04;
-     0.05, 0.04, -0.02, 0.01, -0.01]
+%X = [0.05, -0.04, 0.06, 0.02, -0.01;
+%     0.02, 0.01, -0.06, 0.01, -0.04;
+%     0.05, 0.04, -0.02, 0.01, -0.01]
 
-S1 = cov(X);
+S1 = cov(X1);
 
 disp("cov matrix is of size")
 disp(size(S1))
 
 p=size(S1)(1);
 
-load('./data/Y.txt');
+%load('./data/Y.txt');
 #save -6 Y.mat Y
-Y = Y(:,2:2);
+%Y = Y(:,2:2);
 %disp(size(Y));
 %S2 = cov(Y);
 %disp(size(S2));
 %S2 = S2(1:10,1:10);
 
-S2 = S1;
+S2 = cov(X2);
+
+#disp("input is")
+#disp(S1)
 
 % Generate simulated data
 %[Theta_true_1, Theta_true_2, ind_m_common, ind_m_pert] = data(p);

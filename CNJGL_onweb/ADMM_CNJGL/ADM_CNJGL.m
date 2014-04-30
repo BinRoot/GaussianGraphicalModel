@@ -76,7 +76,6 @@ for (r = 1:opts.homotopy_size)
 %     disp(size(N))
      H = soft_scal(N,lambda_2/(2*rho)); d = [d_1;d_2];
 
-
 %     disp("d_1")
 %     disp(size(d_1))
 %     disp("H")

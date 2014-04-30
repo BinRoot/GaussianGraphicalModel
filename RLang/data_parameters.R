@@ -5,7 +5,7 @@ umax_common <- 0.6
 umin_pert <- 0.3 # Lower and upper bounds for magnitude of perturbations
 umax_pert <- 0.6
 sparsity_prob <- 0.98 # Sparsity level desired in the true inverse covariance 
-percentage_common <- 2
-percentage_pert <- 1
-m_common <- ceiling((percentage_common/100)*p)
-m_pert <- ceiling((percentage_pert/100)*p)
+percentage_common <- 2.0
+percentage_pert <- 1.0
+m_common <- ceiling((percentage_common/100.0)*p)
+m_pert <- ceiling((percentage_pert/100.0)*p)
